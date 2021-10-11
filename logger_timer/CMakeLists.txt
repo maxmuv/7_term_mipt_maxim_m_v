@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.0.0)
+project(LOGGER_TIMER)
+add_library(TIMER timer.h timer.cpp)
+add_executable(LOGGER_TIMER main.cpp)
+target_link_libraries(LOGGER_TIMER LINK_PUBLIC TIMER)
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
+set (CMAKE_CXX_STANDARD 11)
