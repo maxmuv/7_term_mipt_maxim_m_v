@@ -1,6 +1,6 @@
 #include <iostream>
 #include <thread>
-#include "timer.h"
+#include "new_timer_impl.h"
 
 void BOO() {
   SetTimer;
