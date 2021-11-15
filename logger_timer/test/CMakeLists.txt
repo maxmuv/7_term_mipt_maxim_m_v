@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.0.0)
+project(TESTS)
+add_executable(TESTS generator.cpp)
+add_subdirectory(generated_test)
+set (CMAKE_CXX_STANDARD 11)
