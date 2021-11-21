@@ -9,8 +9,9 @@ TimeInfo* Storage::AnnounceStump(TimerStump* st) {
 void Storage::Print() {
   for (int i = 0; i < size; i++) {
     std::cout << stumps[i]->timerStump << " " << time_info[i].calls.load()
-              << " times for " << time_info[i].milliseconds.load()
-              << " milliseconds." << std::endl;
+              << " times for " << time_info[i].nanoseconds.load() / 1000000000
+              << " seconds " << time_info[i].nanoseconds.load() % 1000000000
+              << " nanoseconds." << std::endl;
   }
 }
 
@@ -36,9 +37,9 @@ Timer::Timer(TimerHolder* holder) {
 Timer::~Timer() {
   end = std::chrono::steady_clock::now();
   std::chrono::nanoseconds elapsed_time = end - start;
-  int nano = elapsed_time.count() / 1000000;
+  long long int nano = elapsed_time.count();
   info_target->calls.fetch_add(1);
-  info_target->milliseconds.fetch_add(nano);
+  info_target->nanoseconds.fetch_add(nano);
 }
 
 Aggregator& Aggregator::GetInstance() {

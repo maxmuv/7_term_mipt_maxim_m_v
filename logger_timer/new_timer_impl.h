@@ -39,7 +39,7 @@ class TimerStump {
 
 struct TimeInfo {
   std::atomic<int> calls;
-  std::atomic<int> milliseconds;
+  std::atomic<long long int> nanoseconds;
 };
 
 const int STORAGE_SIZE = 100000;
@@ -49,6 +49,10 @@ class Storage {
   Storage() {
     time_info = new TimeInfo[STORAGE_SIZE];
     stumps = new TimerStump*[STORAGE_SIZE];
+    for (int i = 0; i < STORAGE_SIZE; i++) {
+      time_info[i].calls = 0;
+      time_info[i].nanoseconds = 0;
+    }
     size = 0;
   }
 
